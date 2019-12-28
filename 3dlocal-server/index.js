@@ -14,8 +14,16 @@ app.use(bodyParser.json());
 
 //routes to go here
 
-//error handling - missing route
+//error handling - missing route: if these routes can't be reached 👆, do this:
+app.use(function(req, res, next){
+    let err = new Error('Oops! The tiny computer gnomes that run this website could not find the page you\'re looking for. 🕵️‍♀️🕵️‍♂️');
+    err.status = 404;
+    next(err);
+});
 
-//error handling - something went wrong with a route
+//error handling - shucks, something went wrong with a route:
+app.use(errorHandler);
 
-//run server
+app.listen(PORT, function(){
+    console.log(`Server is running on Port ${PORT}! 🏃‍♀️`);
+});
