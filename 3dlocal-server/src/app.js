@@ -5,10 +5,12 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('./handlers/error');
+const authRoutes = require('./routes/auth');
 
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/api/auth', authRoutes);
 //routes to go here
 
 //error handling - missing route: if these routes can't be reached 👆, do this:
