@@ -18,27 +18,28 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    firstname: {
+    firstName: {
         type: String,
         required: true
     },
-    lastname: {
+    lastName: {
         type: String,
         required: true
     },
     phone: {
         type: String,
-        required: false
     },
     zipcode: {
         type: String,
         required: true
     },
+    profileImageUrl: {
+        type: String
+    },
     bio: {
         type: String,
-        required: false
     },
-    usertype: {
+    userType: {
         type: String,
         required: true,
         enum: ['Maker', 'Seeker', 'Both']
