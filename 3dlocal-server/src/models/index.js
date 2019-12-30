@@ -9,3 +9,4 @@ mongoose.connect(process.env.DB_URI, {
 });
 
 module.exports.User = require('./user');
+module.exports.Listing = require('./listing');

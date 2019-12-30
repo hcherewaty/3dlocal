@@ -43,7 +43,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: ['Maker', 'Seeker', 'Both']
-    }
+    },
+    listings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Listing'
+    }]
 });
 
 //before saving to db, check if pw is changed and if not save, otherwise hash pw.
