@@ -60,7 +60,7 @@ userSchema.pre('save', async function(next){
 });
 
 //compare pw from user with pw saved in db.
-userSchema.method.comparePasswords = async function(passwordFromUserInput, next){
+userSchema.methods.comparePasswords = async function(passwordFromUserInput, next){
     try {
         let isMatch = await bcrypt.compare(passwordFromUserInput, this.password);
         return isMatch;
