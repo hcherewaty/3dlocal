@@ -21,7 +21,7 @@ const listingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    services: {
+    description: {
         type: String,
         required: true,
         maxLength: 1000
