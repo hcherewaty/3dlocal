@@ -6,12 +6,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
+const listingsRoutes = require('./routes/listings');
 
 app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
-//routes to go here
+app.use('/api/users/:id/listings', listingsRoutes);
 
 //error handling - missing route: if these routes can't be reached 👆, do this:
 app.use(function(req, res, next){
