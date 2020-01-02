@@ -30,8 +30,13 @@ const listingSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
-});
+},
+    {
+        timestamps: true
+    }
+);
 
+//pre remove hook
 listingSchema.pre('remove', async function(next){   
     try {
         let user = await User.findById(this.user);
