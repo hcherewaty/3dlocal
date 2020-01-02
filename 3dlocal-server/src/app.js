@@ -14,6 +14,22 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users/:id/listings', loginRequired, validateUser, listingsRoutes);
+app.get('/api/listings', loginRequired, async function(req, res, next){
+    try {
+        let listings = await db.Listing.find()
+            .sort({createdAt: 'desc'})
+            .populate('user', {
+                username: true,
+                phone: true,
+                zipcode: true,
+                bio: true,
+                profileImageUrl: true 
+            });
+            return res.status(200).json(listings);
+    } catch(err){
+        return next(err);
+    }
+});
 
 //error handling - missing route: if these routes can't be reached 👆, do this:
 app.use(function(req, res, next){
