@@ -7,24 +7,17 @@ const listingSchema = new mongoose.Schema({
     modeling: {
         type: String,
         required: true,
-        enum: ['Yes', 'No', 'Depends on project']
-    },
-    machine: {
-        type: String,
-        required: true
-    },
-    hours: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
+        enum: ['I already have a file', 'I need someone to design the model for me', 'Both options apply', 'Not sure']
     },
     description: {
         type: String,
         required: true,
         maxLength: 1000
+    },
+    title: {
+        type: String,
+        required: true,
+        maxLength: 100
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

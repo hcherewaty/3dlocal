@@ -1,18 +1,19 @@
 'use strict';
 
 const db = require('../models');
+const { sanitize } = require('./sanitize');
 
 exports.createListing = async function(req, res, next){
+    //create listing
     try {
+        let sanitizedListing = sanitize(req);
         let listing = await db.Listing.create({
-            modeling: req.body.modeling,
-            machine: req.body.machine,
-            hours: req.body.hours,
-            price: req.body.price,
-            description: req.body.description,
-            user: req.params.id
+            modeling: sanitizedListing.body.modeling,
+            description: sanitizedListing.body.description,
+            user: sanitizedListing.params.id
         });
-        let foundUser = await db.User.findById(req.params.id);
+        let sanitizeUser = sanitize(req);
+        let foundUser = await db.User.findById(sanitizeUser.params.id);
         foundUser.listings.push(listing.id);
         await foundUser.save();
 
@@ -32,7 +33,8 @@ exports.createListing = async function(req, res, next){
 // GET /api/users/:id/listings/:listing_id
 exports.getListing = async function(req, res, next){
     try {
-        let listing = await db.Listing.findById(req.params.listing_id);
+        let sanitizeListing = sanitize(req);
+        let listing = await db.Listing.findById(sanitizeListing.params.listing_id);
         return res.status(200).json(listing);
     } catch(err){
         return next(err);
@@ -41,6 +43,7 @@ exports.getListing = async function(req, res, next){
 
 exports.findAndSortListings = async function(req, res, next){
     try {
+        //TODO: Add sanitization step
         let listings = await db.Listing.find()
             .sort({createdAt: 'desc'})
             .populate('user', {
@@ -59,7 +62,8 @@ exports.findAndSortListings = async function(req, res, next){
 // DELETE /api/users/:id/listings/:listing_id
 exports.deleteListing = async function(req, res, next){
     try {
-        let foundListing = await db.Listing.findById(req.params.listing_id);
+        let sanitizeListing = sanitize(req);
+        let foundListing = await db.Listing.findById(sanitizeListing.params.listing_id);
         await foundListing.remove();
         return res.status(200).json(foundListing);
     } catch(err) {
