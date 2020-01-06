@@ -38,6 +38,7 @@ const userSchema = new mongoose.Schema({
     },
     bio: {
         type: String,
+        maxLength: 200
     },
     userType: {
         type: String,

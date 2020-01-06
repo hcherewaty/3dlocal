@@ -18,3 +18,21 @@ exports.findAndSortListings = async function(req, res, next){
         return next(err);
     }
 };
+
+//================================================================================
+
+// let num = '(123)456-7890';
+
+// function validateNum(num){
+//     let regex = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi;
+
+//     let validateNum = num.replace(regex, '');
+//     console.log(validateNum.length);
+//     if(validateNum.length != 10){
+//         console.log('Phone number is not valid!')
+//     } else {
+//         console.log('Yay!');
+//     }
+// }
+
+// validateNum(num);
