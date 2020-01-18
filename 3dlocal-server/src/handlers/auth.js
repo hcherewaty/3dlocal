@@ -8,6 +8,12 @@ exports.signin = async function(req, res, next){
     //find user
     try {
         let sanitizedUser = sanitize(req.body);
+        if(typeof sanitizedUser.email !== 'string' || typeof sanitizedUser.password !== 'string'){
+            return next({
+                status: 400,
+                message: 'What was that?? Invalid email and/or password. Try again.'
+            });
+        }
         let user = await db.User.findOne({
             email: sanitizedUser.email
         });
@@ -63,8 +69,13 @@ exports.signup = async function(req, res, next){
                     message: 'Something is wrong with your entries. Try again.'
                 });
             }
+            if(typeof value !== 'string'){
+                return next({
+                    status: 400,
+                    message: 'What was that?? Invalid email and/or password. Try again.'
+                });
+            }
         }
-        
         let user = await db.User.create(sanitizedUserInfo);
         let { id, username, firstName, lastName, phone, zipcode, profileImageUrl, bio, userType } = user;
         //create a token
