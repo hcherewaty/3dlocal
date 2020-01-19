@@ -41,10 +41,18 @@ exports.getListing = async function(req, res, next){
     }
 };
 
-exports.findAndSortListings = async function(req, res, next){
+//GET /api/listings
+exports.getAllListings = async function(req, res, next){
     try {
-        //TODO: Add sanitization step
-        let listings = await db.Listing.find()
+        if(!req.headers.authorization){
+            let listings = await db.Listing.find()
+            .sort({createdAt: 'desc'})
+            .populate('user', {
+                username: true 
+            });
+            return res.status(200).json(listings);
+        } else {
+            let listings = await db.Listing.find()
             .sort({createdAt: 'desc'})
             .populate('user', {
                 username: true,
@@ -52,8 +60,9 @@ exports.findAndSortListings = async function(req, res, next){
                 zipcode: true,
                 bio: true,
                 profileImageUrl: true 
-            });
-            return res.status(200).json(listings);
+        });
+        return res.status(200).json(listings);
+        }
     } catch(err){
         return next(err);
     }
