@@ -1,6 +1,6 @@
-import {combineReducers} from "redux";
-import currentUser from "./current-user";
-import errors from "./errors";
+import {combineReducers} from 'redux';
+import currentUser from './current-user';
+import errors from './errors';
 
 const rootReducer = combineReducers ({
     currentUser,
