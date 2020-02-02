@@ -17,8 +17,9 @@ code {
 
 .navbar {
   margin-bottom: 1rem;
-  background-color: #ff9645; 
-  color: #343a40;
+  /* background-color: #ff9645;  */
+  background-image: linear-gradient(to right, #ff9645 , #ffe252);
+  /* color: #343a40; */
 }
 
 .navbar a {
@@ -26,8 +27,8 @@ code {
   color: #343a40;
 }
 
-.navbar li:hover {
-  color: white;
+.navbar a:hover {
+  color: #f6f3f0;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -37,7 +38,6 @@ code {
   width: 20px;
   margin-bottom: 2px;
   margin-right: 5px;
-  /* border-radius: 2px; */
 }
 
 ul.nav.navbar-nav li {
