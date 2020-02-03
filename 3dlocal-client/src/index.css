@@ -48,3 +48,58 @@ ul.nav.navbar-nav li {
   background-image: url('./images/nav-bg.png');
   background-size: 100% 100%;
 } */
+
+/* Home page */
+
+.home {
+  height: 90vw;
+  width: 50%;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  text-align: center;
+}
+
+.left {
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.home h4 {
+  font-size: 3rem;
+}
+.home span {
+  font-size: .75rem;
+}
+
+.right {
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.centered {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered h1 {
+  padding-top: 10rem;
+  font-size: 4rem;
+}
+
+.centered img {
+  width: 650px;
+  padding-right: 50px;
+}

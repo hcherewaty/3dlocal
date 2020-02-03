@@ -10,7 +10,7 @@ class Navbar extends Component {
                 <div className='container-fluid'>
                     <div className='navbar-header'>
                         <Link to='/' className='navbar-brand'>
-                            ABACUS
+                            3D LOCAL
                             {/* <img src={Logo} alt='3dLocal Home' /> */}
                         </Link>
                     </div>
