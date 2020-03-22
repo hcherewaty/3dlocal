@@ -4,7 +4,7 @@ import { configureStore } from '../store';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import Navbar from './Navbar';
-import MainRoutes from './Routes';
+import Routes from './Routes';
 
 const store = configureStore();
 
@@ -13,7 +13,7 @@ const App = () => (
       <Router>
         <div className='navigation'>
           <Navbar />
-          <MainRoutes />  
+          <Routes />  
         </div>
       </Router>
     </Provider>
