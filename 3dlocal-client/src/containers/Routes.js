@@ -3,12 +3,24 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Home from '../components/Home';
+import Auth from '../components/Auth';
+
 //rendering a function that renders the component at that path; pass along props from react router
 const Routes = (props) => {
     return (
         <div className='container'>
             <Switch>
                 <Route exact path='/' render={props => <Home {...props} />} />
+                <Route exact path='/signin' render={props => {
+                    return (
+                        <Auth button='Log in' heading='Welcome back!' {...props}/>
+                    )
+                }} />
+                <Route exact path='/signup' render={props => {
+                    return (
+                        <Auth button='Sign up' heading='Get started!' {...props}/>
+                    )
+                }} />
             </Switch>
         </div>
     );
