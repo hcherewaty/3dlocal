@@ -67,7 +67,7 @@ export default class Auth extends Component {
                                             type='text'
                                             required 
                                         />
-                                        <label htmlFor='last-name'>Last Name <span>*</span></label>
+                                        <label htmlFor='last-name'>Last Name <span className='required'>*</span></label>
                                         <input
                                             className='form-control'
                                             id='last-name'
@@ -145,7 +145,7 @@ export default class Auth extends Component {
                                             rows='5' 
                                         />
                                         <input type='checkbox' className='form-check-input' id='consent' required/>
-                                        <label htmlFor='consent'>I agree to 3DLocal's Community Guidelines, Privacy Policy, and Terms of Service. <span>*</span></label>
+                                        <label htmlFor='consent'><span>*</span> I agree to 3DLocal's Community Guidelines, Privacy Policy, and Terms of Service. <span>*</span></label>
                                     </div>
                                 )
                             }

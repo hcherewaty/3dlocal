@@ -89,3 +89,8 @@ h4 {
 }
 
 /* Auth form */
+
+label span {
+  color: red;
+  font-weight: bold;
+}
