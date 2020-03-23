@@ -18,7 +18,7 @@ const Routes = (props) => {
                 }} />
                 <Route exact path='/signup' render={props => {
                     return (
-                        <Auth button='Sign up' heading='Get started!' {...props}/>
+                        <Auth SignUp button='Sign up' heading='Join the 3DLocal.' {...props}/>
                     )
                 }} />
             </Switch>
