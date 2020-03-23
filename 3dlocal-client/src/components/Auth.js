@@ -17,7 +17,10 @@ export default class Auth extends Component {
         }
     }
 
-    handleSubmit = (e) => {}
+    handleSubmit = (e) => {
+        e.preventDefault();
+    }
+    
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
