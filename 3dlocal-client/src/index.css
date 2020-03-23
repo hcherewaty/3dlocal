@@ -90,7 +90,15 @@ h4 {
 
 /* Auth form */
 
+label {
+  margin-top: 2rem;
+}
+
 label span {
   color: red;
   font-weight: bold;
+}
+
+.checkbox {
+  margin-top: 2.3rem;
 }
