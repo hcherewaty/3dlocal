@@ -8,6 +8,7 @@ import { authUser } from '../store/actions/auth';
 
 //rendering a function that renders the component at that path; pass along props from react router
 const Routes = (props) => {
+    const { authUser } = props;
     return (
         <div className='container'>
             <Switch>
@@ -33,4 +34,4 @@ function mapStateToProps(state) {
     };
 }
 //export a default withRouter to get props from router to component and export connection to redux store
-export default withRouter(connect(mapStateToProps, null)(Routes));
+export default withRouter(connect(mapStateToProps, {authUser})(Routes));
