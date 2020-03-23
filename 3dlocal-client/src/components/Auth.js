@@ -7,6 +7,10 @@ export default class Auth extends Component {
             firstName: '',
             lastName: '',
             username: '',
+            zipcode: '',
+            phone: '',
+            bio:'', 
+            userType: '',
             email: '',
             password: '',
             profileImageUrl: ''
@@ -144,8 +148,8 @@ export default class Auth extends Component {
                                             maxlength='200'
                                             rows='5' 
                                         />
-                                        <input type='checkbox' className='form-check-input' id='consent' required/>
-                                        <label htmlFor='consent'><span>*</span> I agree to 3DLocal's Community Guidelines, Privacy Policy, and Terms of Service. <span>*</span></label>
+                                        <input type='checkbox' className='form-check-input checkbox' id='consent' required/>
+                                        <label htmlFor='consent'><span>*</span> I agree to 3DLocal's Community Guidelines, Privacy Policy, and Terms of Service.<span>*</span></label>
                                     </div>
                                 )
                             }
