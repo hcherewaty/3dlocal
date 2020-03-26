@@ -24,6 +24,9 @@ export default class Auth extends Component {
         .then( () => {
             console.log('Logged in!')
         })
+        .catch( () => {
+            return;
+        })
     }
 
     handleChange = (e) => {
@@ -34,8 +37,14 @@ export default class Auth extends Component {
 
     render() {
 
-        const { SignUp, button, heading } = this.props;
+        const { SignUp, button, heading, errors, removeErr, history } = this.props;
         const { firstName, lastName, username, zipcode, phone, bio, userType, email, password, profileImageUrl } = this.state;
+
+        //listen for any change in the route:
+
+        history.listen( () => {
+            removeErr();
+        });
 
         return(
             <div>
@@ -43,6 +52,10 @@ export default class Auth extends Component {
                     <div className='col-md-4'>
                         <form onSubmit={this.handleSubmit}>
                             <h2>{heading}</h2>
+                            {errors.message && (
+                                <div className='alert alert-danger'>{errors.message}</div>
+                            )}
+                            
                             <label htmlFor='email'>Email <span>*</span></label>
                             <input
                                 className='form-control'
@@ -52,7 +65,7 @@ export default class Auth extends Component {
                                 onChange={this.handleChange}
                                 value={email}
                                 type='text'
-                                required 
+                                // required 
                             />
                             <label htmlFor='password'>Password <span>*</span></label>
                             <input
@@ -62,7 +75,7 @@ export default class Auth extends Component {
                                 placeholder='Password'
                                 onChange={this.handleChange}
                                 type='password'
-                                required 
+                                // required 
                             />
                             {SignUp && 
                                 (
@@ -77,7 +90,7 @@ export default class Auth extends Component {
                                             onChange={this.handleChange}
                                             value={firstName}
                                             type='text'
-                                            required 
+                                            // required 
                                         />
                                         <label htmlFor='last-name'>Last Name <span className='required'>*</span></label>
                                         <input
@@ -88,7 +101,7 @@ export default class Auth extends Component {
                                             onChange={this.handleChange}
                                             value={lastName}
                                             type='text'
-                                            required 
+                                            // required 
                                         />
                                         <label htmlFor='username'>Username <span>*</span></label>
                                         <input
@@ -100,7 +113,7 @@ export default class Auth extends Component {
                                             onChange={this.handleChange}
                                             value={username}
                                             type='text'
-                                            required 
+                                            // required 
                                         />
                                         <label htmlFor='zipcode'>Zip Code <span>*</span></label>
                                         <input
@@ -112,10 +125,10 @@ export default class Auth extends Component {
                                             onChange={this.handleChange}
                                             value={zipcode}
                                             type='number'
-                                            required 
+                                            // required 
                                         />
                                         <label htmlFor='user-type'>I want to: <span>*</span></label>
-                                        <select className='form-control' id='user-type'name='userType'onChange={this.handleChange} required>
+                                        <select className='form-control' id='user-type'name='userType'onChange={this.handleChange} >
                                             <option value='Seeker'>Post a 3D printing/modeling gig.</option>
                                             <option value='Maker'>Find 3D printing/modeling gigs.</option>
                                             <option value='Both'>Both!</option>
@@ -156,7 +169,7 @@ export default class Auth extends Component {
                                             maxLength='200'
                                             rows='5' 
                                         />
-                                        <input type='checkbox' className='form-check-input checkbox' id='consent' required/>
+                                        <input type='checkbox' className='form-check-input checkbox' id='consent' />
                                         <label htmlFor='consent'><span>*</span> I agree to 3DLocal's Community Guidelines, Privacy Policy, and Terms of Service.<span>*</span></label>
                                     </div>
                                 )
