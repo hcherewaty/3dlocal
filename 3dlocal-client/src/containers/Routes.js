@@ -5,22 +5,23 @@ import { connect } from 'react-redux';
 import Home from '../components/Home';
 import Auth from '../components/Auth';
 import { authUser } from '../store/actions/auth';
+import { removeErr } from '../store/actions/errors';
 
 //rendering a function that renders the component at that path; pass along props from react router
 const Routes = (props) => {
-    const { authUser } = props;
+    const { authUser, errors, removeErr } = props;
     return (
         <div className='container'>
             <Switch>
                 <Route exact path='/' render={props => <Home {...props} />} />
                 <Route exact path='/signin' render={props => {
                     return (
-                        <Auth auth={authUser} button='Log in' heading='Welcome back!' {...props}/>
+                        <Auth auth={authUser} errors={errors} removeErr={removeErr} button='Log in' heading='Welcome back!' {...props}/>
                     )
                 }} />
                 <Route exact path='/signup' render={props => {
                     return (
-                        <Auth auth={authUser} SignUp button='Sign up' heading='Join the 3DLocal.' {...props}/>
+                        <Auth auth={authUser} errors={errors} removeErr={removeErr} SignUp button='Sign up' heading='Join the 3DLocal.' {...props}/>
                     )
                 }} />
             </Switch>
@@ -30,8 +31,9 @@ const Routes = (props) => {
 
 function mapStateToProps(state) {
     return {
-        currentUser: state.currentUser
+        // currentUser: state.currentUser,
+        errors: state.errors
     };
 }
 //export a default withRouter to get props from router to component and export connection to redux store
-export default withRouter(connect(mapStateToProps, {authUser})(Routes));
+export default withRouter(connect(mapStateToProps, {authUser, removeErr})(Routes));
