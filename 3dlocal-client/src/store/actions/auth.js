@@ -29,6 +29,7 @@ export function authUser(type, userData){
                 .catch( err => {
                     //oopsie dispatch an errrrr
                     dispatch(addErr(err.message));
+                    console.log('Error msg: ', err.message)
                     reject(); //API call 👎
                 })
         });

@@ -21,7 +21,7 @@ const Routes = (props) => {
                 }} />
                 <Route exact path='/signup' render={props => {
                     return (
-                        <Auth auth={authUser} errors={errors} removeErr={removeErr} SignUp button='Sign up' heading='Join the 3DLocal.' {...props}/>
+                        <Auth auth={authUser} errors={errors} removeErr={removeErr} signUp button='Sign up' heading='Join the 3DLocal.' {...props}/>
                     )
                 }} />
             </Switch>
@@ -31,7 +31,7 @@ const Routes = (props) => {
 
 function mapStateToProps(state) {
     return {
-        // currentUser: state.currentUser,
+        currentUser: state.currentUser,
         errors: state.errors
     };
 }

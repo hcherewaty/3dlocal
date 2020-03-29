@@ -102,3 +102,9 @@ label span {
 .checkbox {
   margin-top: 2.3rem;
 }
+
+.radio-select {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline
+}
