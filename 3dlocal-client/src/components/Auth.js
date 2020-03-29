@@ -37,7 +37,7 @@ export default class Auth extends Component {
 
     render() {
 
-        const { SignUp, button, heading, errors, removeErr, history } = this.props;
+        const { signUp, button, heading, errors, removeErr, history } = this.props;
         const { firstName, lastName, username, zipcode, phone, bio, userType, email, password, profileImageUrl } = this.state;
 
         //listen for any change in the route:
@@ -77,7 +77,7 @@ export default class Auth extends Component {
                                 type='password'
                                 // required 
                             />
-                            {SignUp && 
+                            {signUp && 
                                 (
                                     <div>
                                         <hr />
@@ -127,12 +127,21 @@ export default class Auth extends Component {
                                             type='number'
                                             // required 
                                         />
-                                        <label htmlFor='user-type'>I want to: <span>*</span></label>
-                                        <select className='form-control' id='user-type'name='userType'onChange={this.handleChange} >
-                                            <option value='Seeker'>Post a 3D printing/modeling gig.</option>
-                                            <option value='Maker'>Find 3D printing/modeling gigs.</option>
-                                            <option value='Both'>Both!</option>
-                                        </select>
+                                        <div class='custom-control custom-radio'>
+                                            <label>I want to: <span>*</span></label>
+                                                <div className='radio-select'>
+                                                    <input type='radio' className='custom-control-input' id='user-type-maker' name='userType' value='Maker'onChange={this.handleChange}/>
+                                                    <label htmlFor='user-type-maker' className='custom-control-label' name='userType' value='Maker'>Find 3D printing/modeling gigs.</label>
+                                                </div>
+                                                <div className='radio-select'>
+                                                    <input type='radio' className='custom-control-input' id='user-type-seeker' name='userType' value='Seeker'onChange={this.handleChange}/>
+                                                    <label htmlFor='user-type-seeker' className='custom-control-label' name='userType' value='Seeker'>Post a 3D printing/modeling gig.</label>
+                                                </div>
+                                                <div className='radio-select'>
+                                                    <input type='radio' className='custom-control-input' id='user-type-both' name='userType' value='Both'onChange={this.handleChange}/>
+                                                    <label htmlFor='user-type-both' className='custom-control-label' name='userType' value='Both'>Both!</label>
+                                                </div>
+                                            </div>
                                         <label htmlFor='phone'>Phone number (optional)</label>
                                         <input
                                             autoComplete='off'
