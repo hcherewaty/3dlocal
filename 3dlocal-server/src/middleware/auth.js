@@ -52,30 +52,30 @@ exports.validateUser = function(req, res, next){
     }
 };
 
-exports.loginChecker = function(req, res, next){
-    try {
-        if(!req.headers.authorization){
-            return next();
-        } else {
-            if(req.headers.authorization){
-                const token = req.headers.authorization.split(' ')[1];
-                jwt.verify(token, process.env.SECRET, function(err, payload){
-                    if(payload){
-                        return next();
-                    } else {
-                        //someone either isn't properly logged in and may be trying something tricksy...
-                        return next({
-                            status: 401,
-                            message: 'Hey! You might want to login if you want to view this page... just sayin\'. 🤨'
-                        });
-                    }
-                })       
-            }
-        }
-    } catch(err){
-        return next({
-            status: 401,
-            message: 'Hey! You have to be logged in to do that! 🙅‍♀️'
-        });
-    }
-};
+// exports.loginChecker = function(req, res, next){
+//     try {
+//         if(!req.headers.authorization){
+//             return next();
+//         } else {
+//             if(req.headers.authorization){
+//                 const token = req.headers.authorization.split(' ')[1];
+//                 jwt.verify(token, process.env.SECRET, function(err, payload){
+//                     if(payload){
+//                         return next();
+//                     } else {
+//                         //someone either isn't properly logged in and may be trying something tricksy...
+//                         return next({
+//                             status: 401,
+//                             message: 'Hey! You might want to login if you want to view this page... just sayin\'. 🤨'
+//                         });
+//                     }
+//                 })       
+//             }
+//         }
+//     } catch(err){
+//         return next({
+//             status: 401,
+//             message: 'Hey! You have to be logged in to do that! 🙅‍♀️'
+//         });
+//     }
+// };
