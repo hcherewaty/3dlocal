@@ -8,6 +8,7 @@ exports.createListing = async function(req, res, next){
     try {
         let sanitizedListing = sanitize(req);
         let listing = await db.Listing.create({
+            title: req.body.title,
             modeling: sanitizedListing.body.modeling,
             description: sanitizedListing.body.description,
             user: sanitizedListing.params.id
@@ -76,6 +77,27 @@ exports.deleteListing = async function(req, res, next){
         await foundListing.remove();
         return res.status(200).json(foundListing);
     } catch(err) {
+        return next(err);
+    }
+};
+
+//TODO: edit listing
+exports.editListing = async function(req, res, next){
+    try {
+        let listingId = req.params.listing_id;
+        let updateContent = req.body
+        let editListing = await db.Listing.update({
+            _id: listingId
+        },
+        {
+            $set: {
+                title: updateContent.title,
+                modeling: updateContent.modeling,
+                description: updateContent.description,
+            }
+        });
+        return res.status(200).json(editListing);
+    } catch(err){
         return next(err);
     }
 };

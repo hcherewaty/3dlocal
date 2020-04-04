@@ -2,9 +2,9 @@
 
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { findAndSortListings } = require('../helpers/listings');
+const { getAllListings } = require('../handlers/listings');
 
 router.route('/')
-    .get(findAndSortListings);
+    .get(getAllListings);
 
 module.exports = router;

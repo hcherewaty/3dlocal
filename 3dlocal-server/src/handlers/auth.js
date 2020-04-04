@@ -7,6 +7,7 @@ const { sanitize } = require('./sanitize');
 exports.signin = async function(req, res, next){
     //find user
     try {
+        console.log('In sign in on server!!! Req body: ', req.body, 'Req params: ', req.params);
         let sanitizedUser = sanitize(req.body);
         if(typeof sanitizedUser.email !== 'string' || typeof sanitizedUser.password !== 'string'){
             return next({
@@ -46,13 +47,13 @@ exports.signin = async function(req, res, next){
         } else {
             return next({
                 status: 400,
-                message: 'Yikes! Invalid username/password. Try again.'
+                message: 'Yikes! Invalid username/password. Try again. Sign in Error 1.'
             });
         }
     } catch(err){
         return next({
             status: 400,
-            message: 'Yikes! Invalid username/password. Try again.'
+            message: 'Yikes! Invalid username/password. Try again. Sign in Error 2.'
         });
     }
 }
@@ -62,6 +63,7 @@ exports.signup = async function(req, res, next){
     try {
         let sanitizedUserInfo = sanitize(req.body);
         let userInfo = Object.values(sanitizedUserInfo);
+        console.log('In signup on server!!!', 'Req body: ', req.body, 'Req params: ', req.params);
         for(let value of userInfo){
             if(value === undefined){
                 return next({

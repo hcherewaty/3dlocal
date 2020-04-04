@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
 const listingsRoutes = require('./routes/listings');
-const { loginRequired, validateUser, loginChecker } = require('./middleware/auth');
+const allListingsRoutes = require('./routes/all-listings');
+const { loginRequired, validateUser } = require('./middleware/auth');
 // const db = require('./models');
 // const jwt = require('jsonwebtoken');
 
@@ -16,7 +17,10 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users/:id/listings', loginRequired, validateUser, listingsRoutes);
-app.use('/api/listings', loginChecker, listingsRoutes);
+app.use('/api/listings', loginRequired, allListingsRoutes);
+//TODO:
+//edit profile
+// app.use('/api/users/:id', loginRequired, validateUser, profileRoutes);
 
 //error handling - missing route, do this:
 app.use(function(req, res, next){
