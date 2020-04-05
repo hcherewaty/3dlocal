@@ -45,6 +45,41 @@ const userSchema = new mongoose.Schema({
         required: true,
         enum: ['Maker', 'Seeker', 'Both']
     },
+    availability: {
+        type: String,
+        enum: ['3D Printing Only', '3D Modeling Only', 'Both']
+    },
+    machineType: {
+        type: String
+    },
+    machineMaterial: {
+        type: String
+    },
+    bedSizeL: {
+        type: Number
+    },
+    bedSizeW: {
+        type: Number
+    },
+    bedSizeD: {
+        type: Number
+    },
+    hoursMin: {
+        type: Number
+    },
+    hoursMax: {
+        type: Number
+    },
+    price: {
+        type: Number
+    },
+    details: {
+        type: String,
+        maxlength: 1500
+    },
+    projectImgs: {
+        type: String
+    },
     listings: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Listing'
