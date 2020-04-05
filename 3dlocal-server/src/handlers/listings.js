@@ -11,6 +11,7 @@ exports.createListing = async function(req, res, next){
             title: req.body.title,
             modeling: sanitizedListing.body.modeling,
             description: sanitizedListing.body.description,
+            status: req.body.status,
             user: sanitizedListing.params.id
         });
         let sanitizeUser = sanitize(req);
@@ -45,15 +46,7 @@ exports.getListing = async function(req, res, next){
 //GET /api/listings
 exports.getAllListings = async function(req, res, next){
     try {
-        if(!req.headers.authorization){
-            let listings = await db.Listing.find()
-            .sort({createdAt: 'desc'})
-            .populate('user', {
-                username: true 
-            });
-            return res.status(200).json(listings);
-        } else {
-            let listings = await db.Listing.find()
+        let listings = await db.Listing.find()
             .sort({createdAt: 'desc'})
             .populate('user', {
                 username: true,
@@ -61,9 +54,8 @@ exports.getAllListings = async function(req, res, next){
                 zipcode: true,
                 bio: true,
                 profileImageUrl: true 
-        });
-        return res.status(200).json(listings);
-        }
+            });
+        return res.status(200).json(listings); 
     } catch(err){
         return next(err);
     }
@@ -81,7 +73,7 @@ exports.deleteListing = async function(req, res, next){
     }
 };
 
-//TODO: edit listing
+//edit listing
 exports.editListing = async function(req, res, next){
     try {
         let listingId = req.params.listing_id;

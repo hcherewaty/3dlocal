@@ -2,12 +2,11 @@
 
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { getListing, getAllListings } = require('../handlers/listings');
+const { getUser, updateUser } = require('../handlers/user');
 
-router.route('/:listing_id')
-    .get(getListing);
 
 router.route('/')
-    .get(getAllListings);
+    .get(getUser)
+    .put(updateUser);
 
 module.exports = router;
