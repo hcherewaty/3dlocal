@@ -19,6 +19,9 @@ const listingSchema = new mongoose.Schema({
         required: true,
         maxLength: 100
     },
+    status: {
+        type: Boolean
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

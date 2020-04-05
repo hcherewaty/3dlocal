@@ -10,13 +10,7 @@ router.route('/')
 
 //prefix: /api/users/:id/listings/:listing_id
 router.route('/:listing_id')
-    .get(getListing)
     .put(editListing)
     .delete(deleteListing);
-
-//TODO:
-//edit listing
-// .put(editListing)
-
 
 module.exports = router;
