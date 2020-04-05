@@ -16,6 +16,7 @@ export default class Auth extends Component {
             profileImageUrl: ''
         }
     }
+    accountType = false;
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -33,6 +34,11 @@ export default class Auth extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+        if(e.target.type === 'radio' && (e.target.value === 'Maker' || e.target.value === 'Both')){
+            this.accountType = true;
+        } else {
+            this.accountType = false;
+        }
     }
 
     render() {
@@ -142,6 +148,7 @@ export default class Auth extends Component {
                                                     <label htmlFor='user-type-both' className='custom-control-label' name='userType' value='Both'>Both!</label>
                                                 </div>
                                             </div>
+                                        {this.accountType ? <div>Stuff goes here.</div> : null}
                                         <label htmlFor='phone'>Phone number (optional)</label>
                                         <input
                                             autoComplete='off'
