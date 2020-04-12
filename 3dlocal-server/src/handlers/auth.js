@@ -2,24 +2,28 @@
 
 const db = require('../models');
 const jwt = require('jsonwebtoken');
-const { sanitize } = require('./sanitize');
+// const { sanitize } = require('./sanitize');
 
 exports.signin = async function(req, res, next){
     //find user
     try {
-        console.log('In sign in on server!!! Req body: ', req.body, 'Req params: ', req.params);
-        let sanitizedUser = sanitize(req.body);
-        if(typeof sanitizedUser.email !== 'string' || typeof sanitizedUser.password !== 'string'){
-            return next({
-                status: 400,
-                message: 'What was that?? Invalid email and/or password. Try again.'
-            });
-        }
+        console.log('In sign in on server!!! Req body: ', req.body);
         let user = await db.User.findOne({
-            email: sanitizedUser.email
+            email: req.body.email
         });
-        let { id, username, firstName, lastName, phone, zipcode, profileImageUrl, bio, userType} = user;
-        let isMatch = await user.comparePasswords(sanitizedUser.password);
+        let { id, username, firstName, lastName, phone, zipcode, profileImageUrl, bio, userType, email,
+            availability,
+            machineType,
+            machineMaterial,
+            bedSizeL,
+            bedSizeW,
+            bedSizeD,
+            hoursMin,
+            hoursMax,
+            price,
+            details,
+            projectImgs} = user;
+        let isMatch = await user.comparePasswords(req.body.password);
         if(isMatch){
             let token = jwt.sign({
                 id,
@@ -30,7 +34,19 @@ exports.signin = async function(req, res, next){
                 zipcode,
                 profileImageUrl,
                 bio,
-                userType
+                userType,
+                email,
+                availability,
+                machineType,
+                machineMaterial,
+                bedSizeL,
+                bedSizeW,
+                bedSizeD,
+                hoursMin,
+                hoursMax,
+                price,
+                details,
+                projectImgs
             }, process.env.SECRET);
             return res.status(200).json({
                 id,
@@ -42,6 +58,18 @@ exports.signin = async function(req, res, next){
                 profileImageUrl,
                 bio,
                 userType,
+                email,
+                availability,
+                machineType,
+                machineMaterial,
+                bedSizeL,
+                bedSizeW,
+                bedSizeD,
+                hoursMin,
+                hoursMax,
+                price,
+                details,
+                projectImgs,
                 token
             });
         } else {
@@ -61,25 +89,19 @@ exports.signin = async function(req, res, next){
 exports.signup = async function(req, res, next){
     //create user
     try {
-        let sanitizedUserInfo = sanitize(req.body);
-        let userInfo = Object.values(sanitizedUserInfo);
-        console.log('In signup on server!!!', 'Req body: ', req.body, 'Req params: ', req.params);
-        for(let value of userInfo){
-            if(value === undefined){
-                return next({
-                    status: 400,
-                    message: 'Something is wrong with your entries. Try again.'
-                });
-            }
-            if(typeof value !== 'string'){
-                return next({
-                    status: 400,
-                    message: 'What was that?? Invalid email and/or password. Try again.'
-                });
-            }
-        }
-        let user = await db.User.create(sanitizedUserInfo);
-        let { id, username, firstName, lastName, phone, zipcode, profileImageUrl, bio, userType } = user;
+        console.log('Request body: ', req.body)
+        let newUser = await db.User.create(req.body);
+        let { id, username, firstName, lastName, phone, zipcode, profileImageUrl, bio, userType, email, availability,
+            machineType,
+            machineMaterial,
+            bedSizeL,
+            bedSizeW,
+            bedSizeD,
+            hoursMin,
+            hoursMax,
+            price,
+            details,
+            projectImgs } = newUser;
         //create a token
         let token = jwt.sign({
             id,
@@ -90,7 +112,20 @@ exports.signup = async function(req, res, next){
             zipcode,
             profileImageUrl,
             bio,
-            userType
+            userType,
+            email,
+            availability,
+            machineType,
+            machineMaterial,
+            bedSizeL,
+            bedSizeW,
+            bedSizeD,
+            hoursMin,
+            hoursMax,
+            price,
+            details,
+            projectImgs
+
         }, process.env.SECRET);
         return res.status(200).json({
             id,
@@ -102,6 +137,18 @@ exports.signup = async function(req, res, next){
             profileImageUrl,
             bio,
             userType,
+            email,
+            availability,
+            machineType,
+            machineMaterial,
+            bedSizeL,
+            bedSizeW,
+            bedSizeD,
+            hoursMin,
+            hoursMax,
+            price,
+            details,
+            projectImgs,
             token
         });
     } catch(err) {
