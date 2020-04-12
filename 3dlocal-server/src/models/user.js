@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema({
     },
     availability: {
         type: String,
-        enum: ['3D Printing Only', '3D Modeling Only', 'Both']
+        enum: ['3D Printing Only', '3D Modeling Only', 'Both', '']
     },
     machineType: {
         type: String
@@ -79,7 +79,7 @@ const userSchema = new mongoose.Schema({
     },
     projectImgs: {
         type: String
-    },
+    },  
     listings: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Listing'
