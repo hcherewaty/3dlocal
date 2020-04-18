@@ -9,11 +9,11 @@ import { removeErr } from '../store/actions/errors';
 
 //rendering a function that renders the component at that path; pass along props from react router
 const Routes = (props) => {
-    const { authUser, errors, removeErr } = props;
+    const { authUser, errors, removeErr, currentUser } = props;
     return (
         <div className='container'>
             <Switch>
-                <Route exact path='/' render={props => <Home {...props} />} />
+                <Route exact path='/' render={props => <Home currentUser={currentUser} {...props} />} />
                 <Route exact path='/signin' render={props => {
                     return (
                         <Auth auth={authUser} errors={errors} removeErr={removeErr} button='Log in' heading='Welcome back!' {...props}/>
