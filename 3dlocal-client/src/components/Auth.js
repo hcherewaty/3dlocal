@@ -34,7 +34,7 @@ export default class Auth extends Component {
         const authType = this.props.signUp ? 'signup' : 'signin';
         this.props.auth(authType, this.state)
         .then( () => {
-            console.log('Logged in!')
+            this.props.history.push('/');
         })
         .catch( () => {
             return;
