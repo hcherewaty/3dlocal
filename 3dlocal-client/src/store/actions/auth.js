@@ -8,11 +8,11 @@ export function setCurrentUser(user){
     return {
         type: SET_CURRENT_USER,
         user
-    }
+    };
 }
 
 export function setToken(token){
-    return setHeader(token);
+    setHeader(token);
 }
 
 //to sign up or sign in - takes signin or signup and user data
@@ -25,7 +25,7 @@ export function authUser(type, userData){
             .then( ({token, ...user}) => {
                 // console.log('Token:', token, 'User:', user)
                 localStorage.setItem('jwtToken', token);
-                dispatch(setToken(token));
+                setToken(token);
                 dispatch(setCurrentUser(user));
                 //remove any previous errrrrr's
                 dispatch(removeErr());
@@ -44,7 +44,7 @@ export function authUser(type, userData){
 export function signout() {
     return dispatch => {
         localStorage.clear();
-        dispatch(setToken(false));
+        setToken(false);
         dispatch(setCurrentUser({}));
     };
 }
