@@ -1,4 +1,4 @@
-import {SET_CURRENT_USER} from '../action-types';
+import { SET_CURRENT_USER } from '../action-types';
 
 const DEFAULT_STATE = {
     isAuthenticated: false,
