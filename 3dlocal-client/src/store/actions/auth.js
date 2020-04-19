@@ -1,4 +1,4 @@
-import { apiCall } from '../../services/api';
+import { apiCall, setHeader } from '../../services/api';
 import { SET_CURRENT_USER } from '../action-types';
 import { addErr, removeErr } from '../actions/errors';
 
@@ -11,6 +11,10 @@ export function setCurrentUser(user){
     }
 }
 
+export function setToken(token){
+    return setHeader(token);
+}
+
 //to sign up or sign in - takes signin or signup and user data
 //api call needs to finish before dispatching anything - promise inside thunk
 export function authUser(type, userData){
@@ -19,8 +23,9 @@ export function authUser(type, userData){
         return new Promise((resolve, reject) => {
             return apiCall('post', `/api/auth/${type}`, userData)
             .then( ({token, ...user}) => {
-                console.log('Token:', token, 'User:', user)
+                // console.log('Token:', token, 'User:', user)
                 localStorage.setItem('jwtToken', token);
+                dispatch(setToken(token));
                 dispatch(setCurrentUser(user));
                 //remove any previous errrrrr's
                 dispatch(removeErr());
@@ -39,6 +44,7 @@ export function authUser(type, userData){
 export function signout() {
     return dispatch => {
         localStorage.clear();
+        dispatch(setToken(false));
         dispatch(setCurrentUser({}));
     };
 }
