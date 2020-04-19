@@ -13,12 +13,12 @@ export const deleteListing = (listing) => ({
 
 export const fetchListings = () => {
     return dispatch => {
-        return apiCall('GET', '/api/listings')
+        return apiCall('get', '/api/listings')
         .then( res => {
-            dispatch(showListings(res))
+            dispatch(showListings(res));
         })
         .catch( err => {
-            addErr(err.message)
+            dispatch(addErr(err.message));
         });
     };
 };
