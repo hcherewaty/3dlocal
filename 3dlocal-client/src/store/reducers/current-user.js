@@ -5,23 +5,11 @@ const DEFAULT_STATE = {
     user: {}
 };
 
-// export default (state = DEFAULT_STATE, action) => {
-//     switch (action.type) {
-//         case SET_CURRENT_USER:
-//             return {
-//                 isAuthenticated: Object.keys(action.user).length > 0,
-//                 user: action.user
-//             };
-//             default: 
-//             return state;
-//     }
-// };
-
 export default (state = DEFAULT_STATE, action) => {
     switch (action.type) {
         case SET_CURRENT_USER:
             return {
-                isAuthenticated: !!Object.keys(action.user),
+                isAuthenticated: !!Object.keys(action.user).length,
                 user: action.user
             };
             default: 
